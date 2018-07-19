@@ -1,0 +1,6 @@
+framework module Pods_RealmCachingDemo {
+  umbrella header "Pods-RealmCachingDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}
