@@ -21,6 +21,19 @@ struct RealmEnvironment {
     }
 }
 
+struct Cache {
+
+    var cachedWalletItems: () -> [WalletItemObject] = {
+        do {
+            let realm = try Current.storage.realm.create()
+            return Array(realm.objects(WalletItemObject.self))
+        } catch {
+            return []
+        }
+    }
+}
+
 struct Storage {
     var realm = RealmEnvironment()
+    var cache = Cache()
 }

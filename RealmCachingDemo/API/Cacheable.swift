@@ -22,12 +22,7 @@ extension Array: Cacheable where Element: Cacheable {
     }
 
     var cacheExpiry: TimeInterval {
-        get {
-            return self.reduce(Date.timeIntervalSinceReferenceDate, { Swift.min($0, $1.cacheExpiry) })
-        } set {
-            for var element in self {
-                element.cacheExpiry = newValue
-            }
-        }
+        get { return 0 }
+        set { }
     }
 }

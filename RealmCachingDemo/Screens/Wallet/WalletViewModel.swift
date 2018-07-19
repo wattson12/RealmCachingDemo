@@ -19,8 +19,11 @@ class WalletViewModel {
     func refresh() {
 
         Observable<[WalletItemObject]>
-            .requestStartingWithCachedValues(usingAPIRequest: Current.api.getWalletItems)
-            .debug()
+            .requestStartingWithCachedValues(
+                usingCachedValues: Current.storage.cache.cachedWalletItems,
+                andAPIRequest: Current.api.getWalletItems
+            )
+            .debug("Wallet view model")
             .catchErrorJustReturn([])
             .persist()
             .convertToViewState()
