@@ -25,7 +25,6 @@ class WalletViewModel {
             )
             .debug("Wallet view model")
             .catchErrorJustReturn([])
-            .persist()
             .convertToViewState()
             .bind(to: walletItems)
             .disposed(by: disposeBag)

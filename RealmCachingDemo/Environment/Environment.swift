@@ -11,6 +11,7 @@ import Foundation
 struct Environment {
     var api = API()
     var storage = Storage()
+    var currentTime: () -> TimeInterval = { return Date.timeIntervalSinceReferenceDate }
 }
 
 var Current = Environment()

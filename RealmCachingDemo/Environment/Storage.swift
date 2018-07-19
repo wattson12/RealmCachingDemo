@@ -21,12 +21,26 @@ struct RealmEnvironment {
     }
 }
 
+extension Cacheable {
+
+    var cacheHasExpired: Bool {
+        return cacheExpiry < Current.currentTime()
+    }
+}
+
+extension Array where Element: Cacheable {
+
+    func filterExpiredCacheElements() -> [Element] {
+        return filter { !$0.cacheHasExpired }
+    }
+}
+
 struct Cache {
 
     var cachedWalletItems: () -> [WalletItemObject] = {
         do {
             let realm = try Current.storage.realm.create()
-            return Array(realm.objects(WalletItemObject.self))
+            return Array(realm.objects(WalletItemObject.self)).filterExpiredCacheElements()
         } catch {
             return []
         }
